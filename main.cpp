@@ -59,6 +59,7 @@ int main()
 	sf::Sprite render_sprite{render_texture.getTexture()};//Asignacion de la textura a un sprite
 	render_sprite.setScale(scale_factors);
 	//Fuente para ver la posicion del sprite
+
 	sf::Font font;
 	if (!font.loadFromFile("C:\\pruebaspr3\\mifuente.ttf")) {
 		std::cerr<<"Fallo al cargar \n";
