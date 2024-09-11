@@ -1,7 +1,7 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <settings.hpp>
-#include <vector>
+#include<SFML/Graphics.hpp>
+#include<C:\Users\Liliana\source\repos\test1\settings.hpp>
+#include<vector>
 
 struct Animation
 {

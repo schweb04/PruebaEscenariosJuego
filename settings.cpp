@@ -1,6 +1,6 @@
-#include<stdexcept> 
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\settings.hpp>
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\animation.hpp>
+#include <stdexcept> 
+#include <settings.hpp>
+#include <animation.hpp>
 #include <iostream>
 
 const std::string Settings::ASSETS_PATH{"C:\\pruebaspr3\\assets"};

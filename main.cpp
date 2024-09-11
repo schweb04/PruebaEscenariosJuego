@@ -2,11 +2,11 @@
 #include<SFML/Window.hpp>
 #include<SFML/Graphics.hpp>
 #include<iostream>
-#include<vector>
+#include <vector>
 
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\settings.hpp>
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\char.hpp>
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\animation.hpp>
+#include <settings.hpp>
+#include <char.hpp>
+#include <animation.hpp>
 
 void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::vector<sf::Texture>& Myvector, int& currentFrame, Character& chara)
 {

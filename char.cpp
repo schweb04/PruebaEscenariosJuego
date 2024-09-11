@@ -1,6 +1,6 @@
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\settings.hpp>
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\char.hpp>
-#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\animation.hpp>
+#include <settings.hpp>
+#include <char.hpp>
+#include <animation.hpp>
 
 Character::Character(float _x, float _y, float _w, float _h) noexcept
 	: x{ _x }, y{ _y }, width{ _w }, height{ _h }, sprite{ Settings::textures["Der1"] }

@@ -1,12 +1,12 @@
 #pragma once 
 
-#include <filesystem>
-#include <string>
-#include <unordered_map>
-#include <vector>
+#include<filesystem>
+#include<string>
+#include<unordered_map>
+#include<vector>
 
 
-#include <SFML/Graphics.hpp>
+#include<SFML/Graphics.hpp>
 
 struct Settings
 {
