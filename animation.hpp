@@ -1,6 +1,6 @@
 #pragma once
 #include<SFML/Graphics.hpp>
-#include<C:\Users\eldry\source\repos\test1\settings.hpp>
+#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\settings.hpp>
 #include<vector>
 
 struct Animation

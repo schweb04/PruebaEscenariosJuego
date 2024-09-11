@@ -4,9 +4,9 @@
 #include<iostream>
 #include<vector>
 
-#include<C:\Users\eldry\source\repos\test1\settings.hpp>
-#include<C:\Users\eldry\source\repos\test1\char.hpp>
-#include<C:\Users\eldry\source\repos\test1\animation.hpp>
+#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\settings.hpp>
+#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\char.hpp>
+#include<C:\Users\eldry\source\repos\PruebaEscenariosJuego\animation.hpp>
 
 void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::vector<sf::Texture>& Myvector, int& currentFrame, Character& chara)
 {
