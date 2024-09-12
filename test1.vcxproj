@@ -143,14 +143,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="settings.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="animation.hpp" />
-    <ClInclude Include="char.hpp" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
-    <ClInclude Include="settings.hpp" />
-    <ClInclude Include="stage.hpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

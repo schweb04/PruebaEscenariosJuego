@@ -3,8 +3,8 @@
 #include <animation.hpp>
 #include <iostream>
 
-const std::string Settings::ASSETS_PATH{"C:\\pruebaspr3\\assets"};
-const std::string Settings::TEXTURES_PATH{"C:\\pruebaspr3\\assets\\textures"};
+const std::string Settings::ASSETS_PATH{"assets"};
+const std::string Settings::TEXTURES_PATH{"assets/textures"};
 
 std::unordered_map<std::string,sf::Texture> Settings::textures{};
 
@@ -18,7 +18,7 @@ void Settings::load_textures()
 {
 	sf::Texture texture{};
 	//derecha
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\der1.png"))
+	if (!texture.loadFromFile("assets/textures/der1.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -26,7 +26,7 @@ void Settings::load_textures()
 	Settings::textures["Der1"] = texture;
 	//Settings::AnimationRight.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\der2.png"))
+	if (!texture.loadFromFile("assets/textures/der2.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -34,7 +34,7 @@ void Settings::load_textures()
 	Settings::textures["Der2"] = texture;
 	//Settings::AnimationRight.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\der3.png"))
+	if (!texture.loadFromFile("assets/textures/der3.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -43,7 +43,7 @@ void Settings::load_textures()
 	//Animation::AnimationRight.push_back(texture);
 
 	//frente
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\fre1.png"))
+	if (!texture.loadFromFile("assets/textures/fre1.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -51,7 +51,7 @@ void Settings::load_textures()
 	Settings::textures["Front1"] = texture;
 	//Animation::AnimationFront.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\fre2.png"))
+	if (!texture.loadFromFile("assets/textures/fre2.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -59,7 +59,7 @@ void Settings::load_textures()
 	Settings::textures["Front2"] = texture;
 	//Animation::AnimationFront.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\fre3.png"))
+	if (!texture.loadFromFile("assets/textures/fre3.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -68,7 +68,7 @@ void Settings::load_textures()
 	//Animation::AnimationFront.push_back(texture);
 
 	//izquierda
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\iz1.png"))
+	if (!texture.loadFromFile("assets/textures/iz1.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -76,7 +76,7 @@ void Settings::load_textures()
 	Settings::textures["Iz1"] = texture;
 	//Animation::AnimationLeft.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\iz2.png"))
+	if (!texture.loadFromFile("assets/textures/iz2.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -84,7 +84,7 @@ void Settings::load_textures()
 	Settings::textures["Iz2"] = texture;
 	//Animation::AnimationLeft.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\iz3.png"))
+	if (!texture.loadFromFile("assets/textures/iz3.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -93,7 +93,7 @@ void Settings::load_textures()
 	//Animation::AnimationLeft.push_back(texture);
 
 	//espalda
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\back1.png"))
+	if (!texture.loadFromFile("assets/textures/back1.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -101,7 +101,7 @@ void Settings::load_textures()
 	Settings::textures["Back1"] = texture;
 	//Animation::AnimationBack.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\back2.png"))
+	if (!texture.loadFromFile("assets/textures/back2.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;
@@ -109,7 +109,7 @@ void Settings::load_textures()
 	Settings::textures["Back2"] = texture;
 	//Animation::AnimationBack.push_back(texture);
 
-	if (!texture.loadFromFile("C:\\pruebaspr3\\assets\\textures\\back3.png"))
+	if (!texture.loadFromFile("assets/textures/back3.png"))
 	{
 		std::cerr << "Error loading image" << std::endl;
 		return;

@@ -47,7 +47,7 @@ int main()
 		321.0f, 270.0f, Settings::CHARACTER_WIDTH, Settings::CHARACTER_HEIGHT
 	};
 	sf::Texture tex2;
-	tex2.loadFromFile("C:\\pruebaspr3\\assets\\textures\\iz3.png");
+	tex2.loadFromFile("assets/textures/iz3.png");
 	sf::Sprite ps2{tex2};
 	Character npc
 	{
@@ -61,7 +61,8 @@ int main()
 	//Fuente para ver la posicion del sprite
 
 	sf::Font font;
-	if (!font.loadFromFile("C:\\pruebaspr3\\mifuente.ttf")) {
+	if (!font.loadFromFile("assets/mifuente.ttf")) 
+	{
 		std::cerr<<"Fallo al cargar \n";
 	}
 	//Texto a mostrar
@@ -138,7 +139,7 @@ int main()
 
 		render_texture.clear(sf::Color::Black);//Fondo negro
 		sf::Texture fondo;
-		fondo.loadFromFile("C:\\pruebaspr3\\assets\\textures\\fondo.png");//Cargado de imagen de fondo
+		fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
 		render_texture.draw(sf::Sprite{ fondo });//Pintar fondo
 		character.render(render_texture);
 		npc.render(render_texture);
