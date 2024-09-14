@@ -16,6 +16,7 @@ void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::v
 		chara.setTexture(Myvector[currentFrame]);
 	}
 }
+//prueba
 
 
 
