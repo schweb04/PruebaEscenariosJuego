@@ -29,4 +29,14 @@ struct Settings
 	static void load_textures();
 
 	static void load_frames(std::vector<sf::Texture>& _AnimationRight, std::vector<sf::Texture>& _AnimationLeft, std::vector<sf::Texture>& _AnimationFront, std::vector<sf::Texture>& _AnimationBack);
+
+	static float pos_x(sf::Sprite& spr);
+
+	static float pos_y(sf::Sprite& spr);
+
+	static void set_x(float _x, sf::Sprite& sprite);
+
+	static void set_y(float _y, sf::Sprite& sprite);
+
+	static void limit_principal_map(sf::Sprite& sprite) ;
 };
