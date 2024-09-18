@@ -142,6 +142,7 @@
     <ClCompile Include="char.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="settings.cpp" />
+    <ClCompile Include="stage.cpp" />
     <ClCompile Include="stateStack.cpp" />
   </ItemGroup>
   <ItemGroup>

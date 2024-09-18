@@ -5,7 +5,6 @@
 class Stage
 {
 public:
-	Stage(float _w, float _h) noexcept;
 
 	Stage(float _w, float _h, sf::Sprite spr) noexcept;
 
@@ -16,8 +15,6 @@ public:
 	void render(sf::RenderTarget& target) const noexcept;
 
 	sf::Sprite get_sprite() noexcept;
-
-	void limit_map() noexcept;
 
 	void setTexture(sf::Texture& tex)noexcept;
 
