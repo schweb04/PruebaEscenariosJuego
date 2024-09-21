@@ -7,6 +7,7 @@
 #include <settings.hpp>
 #include <char.hpp>
 #include <animation.hpp>
+#include <stateStack.hpp>
 
 void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::vector<sf::Texture>& Myvector, int& currentFrame, Character& chara)
 {
@@ -35,7 +36,17 @@ int main()
 
 
 	sf::RenderWindow window{ sf::VideoMode{Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT} , "Demo", sf::Style::Close};//Ventana
-	sf::RenderTexture render_texture{};//Tectura
+
+	sf::Texture fondo;
+	fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
+	
+	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo });
+	
+	StateStack allStages;
+	allStages.pushStage(mainStage);
+
+
+	sf::RenderTexture render_texture{};//Textura
 	render_texture.create(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT);//Crear textura
 
 	//Escala de sprite
@@ -72,7 +83,7 @@ int main()
 	text.setCharacterSize(20);
 	text.setFillColor(sf::Color::White);
 
-	float speed = 10.0f;
+	float speed = 2.5f;
 
 
 
@@ -137,11 +148,8 @@ int main()
 		text.setPosition(10, 10); // Esquina superior izquierda de la ventana
 
 
-
 		render_texture.clear(sf::Color::Black);//Fondo negro
-		sf::Texture fondo;
-		fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
-		render_texture.draw(sf::Sprite{ fondo });//Pintar fondo
+		render_texture.draw(allStages.getCurrentStage()->get_sprite());//Pintar fondo
 		character.render(render_texture);
 		npc.render(render_texture);
 		render_texture.display();
