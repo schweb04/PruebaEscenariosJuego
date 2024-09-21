@@ -147,6 +147,14 @@ int main()
 		// Posicionar el texto donde quieras
 		text.setPosition(10, 10); // Esquina superior izquierda de la ventana
 
+		if (posX == 547.f && posY == 276.f)
+		{
+			fondo.loadFromFile("assets/textures/fondo2.jpg");//Cargado de imagen de fondo
+
+			std::shared_ptr<Stage> stage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo });
+			allStages.pushStage(stage);
+		}
+
 
 		render_texture.clear(sf::Color::Black);//Fondo negro
 		render_texture.draw(allStages.getCurrentStage()->get_sprite());//Pintar fondo
