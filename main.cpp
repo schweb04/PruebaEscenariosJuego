@@ -77,13 +77,23 @@ int main()
 	{
 		std::cerr<<"Fallo al cargar \n";
 	}
+
+
 	//Texto a mostrar
 	sf::Text text;
 	text.setFont(font);
 	text.setCharacterSize(20);
 	text.setFillColor(sf::Color::White);
 
-	float speed = 2.5f;
+	//Textura y sprite para mensaje de presione e
+	sf::Texture Mytex;
+	Mytex.loadFromFile("assets/textures/presione_e.jpg");
+	sf::Sprite Myspr{Mytex};
+	Myspr.setPosition(522.f,345.f);
+
+
+
+	float speed = 120.5f;
 
 
 
@@ -104,7 +114,7 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 
-			float x = float((-1.0) * (speed));
+			float x = float((-1.0) * (speed) * (deltaTime));
 			float y = 0.0;
 			character.move(x, y);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationLeft, currentFrame, character);
@@ -113,7 +123,7 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 
-			float x = float((1.0) * (speed) /** (deltaTime)*/);
+			float x = float((1.0) * (speed) * (deltaTime));
 			float y = 0.0;
 			character.move(x, y);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationRight, currentFrame, character);
@@ -122,7 +132,7 @@ int main()
 		{
 
 			float x = 0.0;
-			float y = float((-1.0) * (speed)   /** (deltaTime)*/);
+			float y = float((-1.0) * (speed) * (deltaTime));
 			character.move(x, y);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationBack, currentFrame, character);
 		}
@@ -130,7 +140,7 @@ int main()
 		{
 
 			float x = 0.0;
-			float y = float((1.0) * (speed) );
+			float y = float((1.0) * (speed) * (deltaTime));
 			character.move(x, y);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationFront, currentFrame, character);
 		}
@@ -147,7 +157,7 @@ int main()
 		// Posicionar el texto donde quieras
 		text.setPosition(10, 10); // Esquina superior izquierda de la ventana
 
-		if (posX == 547.f && posY == 276.f)
+		if (posX >= 540.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E))//Cambio de escenario
 		{
 			fondo.loadFromFile("assets/textures/fondo2.jpg");//Cargado de imagen de fondo
 
@@ -156,10 +166,16 @@ int main()
 		}
 
 
+
 		render_texture.clear(sf::Color::Black);//Fondo negro
 		render_texture.draw(allStages.getCurrentStage()->get_sprite());//Pintar fondo
 		character.render(render_texture);
 		npc.render(render_texture);
+		//Mostrar mensaje para cambiar de escenario
+		if (posX >= 540.f)
+		{
+			render_texture.draw(Myspr);
+		}
 		render_texture.display();
 
 
