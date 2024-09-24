@@ -22,6 +22,7 @@ void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::v
 
 
 
+
 int main()
 {
 	Settings::init();//Inicializacion de texturas
