@@ -2,6 +2,15 @@
 
 #include <SFML/Graphics.hpp>
 
+enum class Current_stage
+{
+	Principal_stage,
+	casa_1,
+	casa_2
+};
+
+
+
 class Character
 {
 public:
@@ -17,7 +26,7 @@ public:
 
 	sf::Sprite get_sprite() noexcept;
 
-	void move(float& mov_x, float& mov_y) noexcept;
+	void move(float& mov_x, float& mov_y, Current_stage& _stage) noexcept;
 
 	void setTexture(sf::Texture& tex)noexcept;
 	

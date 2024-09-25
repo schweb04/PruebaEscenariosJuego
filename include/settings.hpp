@@ -8,6 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 
+
 struct Settings
 {
 	static const std::string ASSETS_PATH;
@@ -39,4 +40,5 @@ struct Settings
 	static void set_y(float _y, sf::Sprite& sprite);
 
 	static void limit_principal_map(sf::Sprite& sprite) ;
+
 };

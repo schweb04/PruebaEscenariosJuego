@@ -11,7 +11,6 @@ std::unordered_map<std::string,sf::Texture> Settings::textures{};
 void Settings::init()
 {
 	Settings::load_textures();
-	
 }
 
 void Settings::load_textures()
@@ -417,3 +416,5 @@ void Settings::limit_principal_map(sf::Sprite& sprite)
 		set_x(572, sprite);
 	}
 }
+
+

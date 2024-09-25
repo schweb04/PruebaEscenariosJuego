@@ -8,6 +8,12 @@
 #include <char.hpp>
 #include <animation.hpp>
 #include <stateStack.hpp>
+#include <stage.hpp>
+
+
+
+
+
 
 void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::vector<sf::Texture>& Myvector, int& currentFrame, Character& chara)
 {
@@ -30,20 +36,31 @@ int main()
 	Animation MyAnimation;//Structura que guarda los frames
 	Settings::load_frames(MyAnimation.AnimationRight, MyAnimation.AnimationLeft, MyAnimation.AnimationFront, MyAnimation.AnimationBack);//Cargado de frames
 
-
 	int currentFrame = 0;
 	float timeSinceLastUpdate = 0.0f;
 	float timeBetweenUpdates = 0.01f; // Ajustar la velocidad de la animación
 
 
+	bool mirar_der = false;
+	bool mirar_arriba = false;
+	bool mirar_iz = false;
+	bool mirar_abajo = false;
+
+
+
 	sf::RenderWindow window{ sf::VideoMode{Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT} , "Demo", sf::Style::Close};//Ventana
 
 	sf::Texture fondo;
+	sf::Texture fondo2;
+
 	fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
+	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{fondo});
 	
-	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo });
+	fondo2.loadFromFile("assets/textures/fondo2.jpg");//Cargado de imagen de fondo
+	std::shared_ptr<Stage> casa1 = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo2 });
+
 	
-	StateStack allStages;
+	StateStack allStages;// StateStack
 	allStages.pushStage(mainStage);
 
 
@@ -90,9 +107,10 @@ int main()
 	sf::Texture Mytex;
 	Mytex.loadFromFile("assets/textures/presione_e.jpg");
 	sf::Sprite Myspr{Mytex};
-	Myspr.setPosition(522.f,345.f);
+	Myspr.setPosition(522.f,200.f);
 
-
+	//Identificador del stage
+	Current_stage My_current_stage{ Current_stage::Principal_stage };
 
 	float speed = 120.5f;
 
@@ -112,38 +130,60 @@ int main()
 		timeSinceLastUpdate += deltaTime;
 
 		// Movimiento del sprite basado en las teclas presionadas
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 
 			float x = float((-1.0) * (speed) * (deltaTime));
 			float y = 0.0;
-			character.move(x, y);
+			character.move(x, y, My_current_stage);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationLeft, currentFrame, character);
 
+			mirar_iz = true;
+			mirar_abajo = false;
+			mirar_der = false;
+			mirar_arriba = false;
+
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 
 			float x = float((1.0) * (speed) * (deltaTime));
 			float y = 0.0;
-			character.move(x, y);
+			character.move(x, y, My_current_stage);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationRight, currentFrame, character);
+
+			mirar_iz = false;
+			mirar_abajo = false;
+			mirar_der = true;
+			mirar_arriba = false;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 
 			float x = 0.0;
 			float y = float((-1.0) * (speed) * (deltaTime));
-			character.move(x, y);
+			character.move(x, y, My_current_stage);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationBack, currentFrame, character);
+
+			mirar_iz = false;
+			mirar_abajo = false;
+			mirar_der = false;
+			mirar_arriba = true;
+
+
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 
 			float x = 0.0;
 			float y = float((1.0) * (speed) * (deltaTime));
-			character.move(x, y);
+			character.move(x, y, My_current_stage);
 			fun_animation(timeSinceLastUpdate, timeBetweenUpdates, MyAnimation.AnimationFront, currentFrame, character);
+
+			mirar_iz = false;
+			mirar_abajo = true;
+			mirar_der = false;
+			mirar_arriba = false;
 		}
 
 		
@@ -158,12 +198,17 @@ int main()
 		// Posicionar el texto donde quieras
 		text.setPosition(10, 10); // Esquina superior izquierda de la ventana
 
-		if (posX >= 540.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E))//Cambio de escenario
+		if (posX >= 540.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_der && My_current_stage == Current_stage::Principal_stage)//Cambio de escenario con key 
 		{
-			fondo.loadFromFile("assets/textures/fondo2.jpg");//Cargado de imagen de fondo
+			allStages.pushStage(casa1);
+			My_current_stage = Current_stage::casa_1;
 
-			std::shared_ptr<Stage> stage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo });
-			allStages.pushStage(stage);
+		}
+
+		if (posX <= 200.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_iz && My_current_stage == Current_stage::casa_1)
+		{
+			allStages.popStage();
+			My_current_stage = Current_stage::Principal_stage;
 		}
 
 
@@ -173,7 +218,11 @@ int main()
 		character.render(render_texture);
 		npc.render(render_texture);
 		//Mostrar mensaje para cambiar de escenario
-		if (posX >= 540.f)
+		if (posX >= 540.f && mirar_der && My_current_stage == Current_stage::Principal_stage)
+		{
+			render_texture.draw(Myspr);
+		}
+		else if(posX <= 200.f && mirar_iz && My_current_stage == Current_stage::casa_1)
 		{
 			render_texture.draw(Myspr);
 		}
