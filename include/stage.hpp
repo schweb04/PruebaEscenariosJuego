@@ -18,10 +18,6 @@ public:
 
 	void setTexture(sf::Texture& tex)noexcept;
 
-
-
-
-
 private:
 
 	float width;

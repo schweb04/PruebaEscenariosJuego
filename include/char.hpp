@@ -9,8 +9,6 @@ enum class Current_stage
 	casa_2
 };
 
-
-
 class Character
 {
 public:
@@ -28,7 +26,9 @@ public:
 
 	void move(float& mov_x, float& mov_y, Current_stage& _stage) noexcept;
 
-	void setTexture(sf::Texture& tex)noexcept;
+	void setTexture(sf::Texture& tex) noexcept;
+
+	void setPosition(float _x, float _y) noexcept;
 	
 private:
 

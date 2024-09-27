@@ -48,7 +48,7 @@ int main()
 
 
 
-	sf::RenderWindow window{ sf::VideoMode{Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT} , "Demo", sf::Style::Close};//Ventana
+	sf::RenderWindow window{ sf::VideoMode{Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT} , "Demo", sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar };//Ventana
 
 	sf::Texture fondo;
 	sf::Texture fondo2;
@@ -56,7 +56,7 @@ int main()
 	fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
 	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{fondo});
 	
-	fondo2.loadFromFile("assets/textures/fondo2.jpg");//Cargado de imagen de fondo
+	fondo2.loadFromFile("assets/textures/casa1.png");//Cargado de imagen de fondo
 	std::shared_ptr<Stage> casa1 = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo2 });
 
 	
@@ -207,6 +207,8 @@ int main()
 
 		if (posX <= 200.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_iz && My_current_stage == Current_stage::casa_1)
 		{
+			character.setPosition(540.f, 276.f);
+			
 			allStages.popStage();
 			My_current_stage = Current_stage::Principal_stage;
 		}

@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <vector>
 
-
 #include <SFML/Graphics.hpp>
 
 
@@ -21,7 +20,6 @@ struct Settings
 	static constexpr float CHARACTER_WIDTH{46.f};
 	static constexpr float CHARACTER_HEIGHT{46.f};
 	static constexpr float SPEED{40.f};
-
 
 	static std::unordered_map<std::string,sf::Texture> textures;
 

@@ -42,3 +42,8 @@ void Character::move(float& mov_x,float& mov_y, Current_stage& _stage) noexcept
 	}
 }
 
+void Character::setPosition(float _x, float _y) noexcept
+{
+	sprite.setPosition(_x, _y);
+}
+
