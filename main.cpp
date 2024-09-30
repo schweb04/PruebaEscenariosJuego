@@ -118,10 +118,9 @@ int main()
 	text.setFillColor(sf::Color::White);
 
 	//Textura y sprite para mensaje de presione e
-	sf::Texture Mytex;
-	Mytex.loadFromFile("assets/textures/presione_e.jpg");
-	sf::Sprite Myspr{Mytex};
-	Myspr.setPosition(522.f,200.f);
+	sf::Texture press_e_action;
+	press_e_action.loadFromFile("assets/textures/entrar.jpg");
+	sf::Sprite press_e{press_e_action};
 
 	//Identificador del stage
 	Current_stage My_current_stage{ Current_stage::Principal_stage };
@@ -214,13 +213,15 @@ int main()
 
 		if (posX >= 540.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_der && My_current_stage == Current_stage::Principal_stage)//Cambio de escenario con key 
 		{
+			character.setPosition(18.f, 324.f);
+			
 			allStages.pushStage(casa1);
 			My_current_stage = Current_stage::casa_1;
 
 			show_npc = false;
 		}
 
-		if (posX <= 200.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_iz && My_current_stage == Current_stage::casa_1) //Volver a escenario principal
+		if (posX <= 18.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_iz && My_current_stage == Current_stage::casa_1) //Volver a escenario principal
 		{
 			character.setPosition(540.f, 276.f);
 
@@ -230,7 +231,7 @@ int main()
 			show_npc = true;
 		}
 
-		if (posX <= 210.f && posY >= 285.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_abajo && My_current_stage == Current_stage::Principal_stage)//Cambio de escenario con key 
+		if (posX <= 220.f && posY >= 285.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_abajo && My_current_stage == Current_stage::Principal_stage)//Cambio de escenario con key 
 		{
 			character.setPosition(405.f, 5.f);
 			
@@ -264,23 +265,32 @@ int main()
 		//Mostrar mensaje para cambiar de escenario
 		if (posX >= 540.f && mirar_der && My_current_stage == Current_stage::Principal_stage)
 		{
-			render_texture.draw(Myspr);
+			press_e.setPosition(522.f, 200.f);
+			press_e_action.loadFromFile("assets/textures/entrar.jpg");
+
+			render_texture.draw(press_e);
 		}
-		else if (posX <= 200.f && mirar_iz && My_current_stage == Current_stage::casa_1)
+		else if (posX <= 18.f && mirar_iz && My_current_stage == Current_stage::casa_1)
 		{
-			render_texture.draw(Myspr);
+			press_e.setPosition(posX + 10.f, posY - 40.f);
+			press_e_action.loadFromFile("assets/textures/salir.jpg");
+
+			render_texture.draw(press_e);
 		}
-		else if (posX <= 210.f && posY >= 285.f && mirar_abajo && My_current_stage == Current_stage::Principal_stage) 
+		else if (posX <= 220.f && posY >= 285.f && mirar_abajo && My_current_stage == Current_stage::Principal_stage) 
 		{
-			Myspr.setPosition(135.f, 350.f);
-			render_texture.draw(Myspr);
+			press_e.setPosition(115.f, 380.f);
+			press_e_action.loadFromFile("assets/textures/salir.jpg");
+
+			render_texture.draw(press_e);
 
 		}
 		else if (posY <= 10.f && mirar_arriba && My_current_stage == Current_stage::outside)
 		{
-			Myspr.setPosition(250.f, 50.f);
-			render_texture.draw(Myspr);
-
+			press_e.setPosition(posX - 85.f, posY + 50.f);
+			press_e_action.loadFromFile("assets/textures/entrar.jpg");
+			
+			render_texture.draw(press_e);
 		}
 		
 		render_texture.display();
