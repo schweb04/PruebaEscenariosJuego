@@ -45,19 +45,23 @@ int main()
 	bool mirar_arriba = false;
 	bool mirar_iz = false;
 	bool mirar_abajo = false;
-
+	bool show_npc = true;
 
 
 	sf::RenderWindow window{ sf::VideoMode{Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT} , "Demo", sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar };//Ventana
 
 	sf::Texture fondo;
 	sf::Texture fondo2;
+	sf::Texture fondo3;
 
 	fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
-	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{fondo});
+	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo });
 	
 	fondo2.loadFromFile("assets/textures/casa1.png");//Cargado de imagen de fondo
 	std::shared_ptr<Stage> casa1 = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo2 });
+
+	fondo3.loadFromFile("assets/textures/outside.png");//Cargado de imagen de fondo
+	std::shared_ptr<Stage> outside = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo3 });
 
 	
 	StateStack allStages;// StateStack
@@ -72,16 +76,26 @@ int main()
 		float(Settings::WINDOW_WIDTH) / float(Settings::VIRTUAL_WIDTH),
 		float(Settings::WINDOW_HEIGHT) / float(Settings::VIRTUAL_HEIGHT)
 	};
+	
 	Character character//Inicializacion de personaje
 	{
 		321.0f, 270.0f, Settings::CHARACTER_WIDTH, Settings::CHARACTER_HEIGHT
 	};
+	
 	sf::Texture tex2;
 	tex2.loadFromFile("assets/textures/iz3.png");
 	sf::Sprite ps2{tex2};
 	Character npc
 	{
-		600,270, 30, 50, ps2
+		580, 280, 30, 50, ps2
+	};
+
+	sf::Texture tex3;
+	tex3.loadFromFile("assets/textures/back2.png");
+	sf::Sprite ps3{ tex3 };
+	Character npc2
+	{
+		185, 325, 30, 50, ps3
 	};
 
 
@@ -203,31 +217,72 @@ int main()
 			allStages.pushStage(casa1);
 			My_current_stage = Current_stage::casa_1;
 
+			show_npc = false;
 		}
 
-		if (posX <= 200.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_iz && My_current_stage == Current_stage::casa_1)
+		if (posX <= 200.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_iz && My_current_stage == Current_stage::casa_1) //Volver a escenario principal
 		{
 			character.setPosition(540.f, 276.f);
-			
+
 			allStages.popStage();
 			My_current_stage = Current_stage::Principal_stage;
+
+			show_npc = true;
 		}
 
+		if (posX <= 210.f && posY >= 285.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_abajo && My_current_stage == Current_stage::Principal_stage)//Cambio de escenario con key 
+		{
+			character.setPosition(405.f, 5.f);
+			
+			allStages.pushStage(outside);
+			My_current_stage = Current_stage::outside;
+
+			show_npc = false;
+		}
+
+		if (posY <= 10.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_arriba && My_current_stage == Current_stage::outside)
+		{
+			character.setPosition(185.f, 300.f);
+
+			allStages.popStage();
+			My_current_stage = Current_stage::Principal_stage;
+
+			show_npc = true;
+		}
 
 
 		render_texture.clear(sf::Color::Black);//Fondo negro
 		render_texture.draw(allStages.getCurrentStage()->get_sprite());//Pintar fondo
 		character.render(render_texture);
-		npc.render(render_texture);
+		
+		if (show_npc)
+		{
+			npc.render(render_texture);
+			npc2.render(render_texture);
+		}
+
 		//Mostrar mensaje para cambiar de escenario
 		if (posX >= 540.f && mirar_der && My_current_stage == Current_stage::Principal_stage)
 		{
 			render_texture.draw(Myspr);
 		}
-		else if(posX <= 200.f && mirar_iz && My_current_stage == Current_stage::casa_1)
+		else if (posX <= 200.f && mirar_iz && My_current_stage == Current_stage::casa_1)
 		{
 			render_texture.draw(Myspr);
 		}
+		else if (posX <= 210.f && posY >= 285.f && mirar_abajo && My_current_stage == Current_stage::Principal_stage) 
+		{
+			Myspr.setPosition(135.f, 350.f);
+			render_texture.draw(Myspr);
+
+		}
+		else if (posY <= 10.f && mirar_arriba && My_current_stage == Current_stage::outside)
+		{
+			Myspr.setPosition(250.f, 50.f);
+			render_texture.draw(Myspr);
+
+		}
+		
 		render_texture.display();
 
 

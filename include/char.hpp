@@ -6,7 +6,9 @@ enum class Current_stage
 {
 	Principal_stage,
 	casa_1,
-	casa_2
+	casa_2,
+	outside,
+	combat
 };
 
 class Character
