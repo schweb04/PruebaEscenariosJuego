@@ -43,7 +43,7 @@ int main()
 	Animation MyAnimation;//Structura que guarda los frames
 	Attack_animation animation_monster1;// estructura que guarda los frames del monstruo 1
 	Settings::load_frames(MyAnimation.AnimationRight, MyAnimation.AnimationLeft, MyAnimation.AnimationFront, MyAnimation.AnimationBack);//Cargado de frames
-	load_monster1(animation_monster1.Animiation_Attack);
+	load_monster1(animation_monster1.Animation_Attack);
 
 	int currentFrame = 0;
 	float timeSinceLastUpdate = 0.0f;
@@ -144,7 +144,7 @@ int main()
 
 	//Textura y sprite para mensaje de presione e
 	sf::Texture press_e_action;
-	press_e_action.loadFromFile("assets/textures/entrar.jpg");
+	press_e_action.loadFromFile("assets/textures/enter.png");
 	sf::Sprite press_e{press_e_action};
 
 	//Identificador del stage
@@ -307,7 +307,7 @@ int main()
 
 		if (My_current_stage == Current_stage::combat && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
-			fun_animation(m_timeSinceLastUpdate, m_timeBetweenUpdates, animation_monster1.Animiation_Attack, m_currentFrame, monster1);
+			fun_animation(m_timeSinceLastUpdate, m_timeBetweenUpdates, animation_monster1.Animation_Attack, m_currentFrame, monster1);
 		}
 
 
@@ -330,21 +330,21 @@ int main()
 		if (posX >= 540.f && mirar_der && My_current_stage == Current_stage::Principal_stage)
 		{
 			press_e.setPosition(522.f, 200.f);
-			press_e_action.loadFromFile("assets/textures/entrar.jpg");
+			press_e_action.loadFromFile("assets/textures/enter.png");
 
 			render_texture.draw(press_e);
 		}
 		else if (posX <= 18.f && mirar_iz && My_current_stage == Current_stage::casa_1)
 		{
 			press_e.setPosition(posX + 10.f, posY - 40.f);
-			press_e_action.loadFromFile("assets/textures/salir.jpg");
+			press_e_action.loadFromFile("assets/textures/exit.png");
 
 			render_texture.draw(press_e);
 		}
 		else if (posX <= 220.f && posY >= 285.f && mirar_abajo && My_current_stage == Current_stage::Principal_stage) 
 		{
 			press_e.setPosition(115.f, 380.f);
-			press_e_action.loadFromFile("assets/textures/salir.jpg");
+			press_e_action.loadFromFile("assets/textures/exit.png");
 
 			render_texture.draw(press_e);
 
@@ -352,21 +352,21 @@ int main()
 		else if (posY <= 10.f && mirar_arriba && My_current_stage == Current_stage::outside)
 		{
 			press_e.setPosition(posX - 85.f, posY + 50.f);
-			press_e_action.loadFromFile("assets/textures/entrar.jpg");
+			press_e_action.loadFromFile("assets/textures/enter.png");
 			
 			render_texture.draw(press_e);
 		}
 		else if (posY >= 190.f && mirar_abajo && My_current_stage == Current_stage::outside)
 		{
 			press_e.setPosition(185, 200);
-			press_e_action.loadFromFile("assets/textures/entrar.jpg");
+			press_e_action.loadFromFile("assets/textures/fight.png");
 
 			render_texture.draw(press_e);
 		}
 		else if (My_current_stage == Current_stage::combat)
 		{
 			press_e.setPosition(115.f, 380.f);
-			press_e_action.loadFromFile("assets/textures/salir.jpg");
+			press_e_action.loadFromFile("assets/textures/exit.png");
 
 			render_texture.draw(press_e);
 

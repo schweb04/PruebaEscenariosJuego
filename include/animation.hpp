@@ -13,5 +13,5 @@ struct Animation
 
 struct Attack_animation
 {
-	std::vector<sf::Texture> Animiation_Attack;
+	std::vector<sf::Texture> Animation_Attack;
 };

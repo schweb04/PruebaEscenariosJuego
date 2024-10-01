@@ -2,10 +2,6 @@
 #include <char.hpp>
 #include <animation.hpp>
 
-
-
-
-
 Character::Character(float _x, float _y, float _w, float _h) noexcept
 	: x{ _x }, y{ _y }, width{ _w }, height{ _h }, sprite{ Settings::textures["Der1"] }
 {
