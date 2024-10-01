@@ -35,6 +35,7 @@ void load_monster1(std::vector<sf::Texture>& _A)
 
 
 
+
 int main()
 {
 	Settings::init();//Inicializacion de texturas
