@@ -25,14 +25,12 @@ void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::v
 }
 //prueba
 
-void load_monster1(std::vector<sf::Texture> _A)
+void load_monster1(std::vector<sf::Texture>& _A)
 {
-	_A.push_back(Settings::textures["Monster1_stand"]);
 	_A.push_back(Settings::textures["Monster1_at1"]);
 	_A.push_back(Settings::textures["Monster1_at2"]);
 	_A.push_back(Settings::textures["Monster1_at3"]);
 	_A.push_back(Settings::textures["Monster1_at4"]);
-	_A.push_back(Settings::textures["Monster1_diying"]);
 }
 
 
@@ -44,10 +42,15 @@ int main()
 	Animation MyAnimation;//Structura que guarda los frames
 	Attack_animation animation_monster1;// estructura que guarda los frames del monstruo 1
 	Settings::load_frames(MyAnimation.AnimationRight, MyAnimation.AnimationLeft, MyAnimation.AnimationFront, MyAnimation.AnimationBack);//Cargado de frames
+	load_monster1(animation_monster1.Animiation_Attack);
 
 	int currentFrame = 0;
 	float timeSinceLastUpdate = 0.0f;
 	float timeBetweenUpdates = 0.01f; // Ajustar la velocidad de la animación
+
+	int m_currentFrame = 0;
+	float m_timeSinceLastUpdate = 0.0f;
+	float m_timeBetweenUpdates = 0.1f;
 
 
 	bool mirar_der = false;
@@ -62,6 +65,7 @@ int main()
 	sf::Texture fondo;
 	sf::Texture fondo2;
 	sf::Texture fondo3;
+	sf::Texture fondo4;
 
 	fondo.loadFromFile("assets/textures/fondo.png");//Cargado de imagen de fondo
 	std::shared_ptr<Stage> mainStage = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo });
@@ -71,6 +75,9 @@ int main()
 
 	fondo3.loadFromFile("assets/textures/outside.png");//Cargado de imagen de fondo
 	std::shared_ptr<Stage> outside = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo3 });
+
+	fondo4.loadFromFile("assets/textures/escena_combate.png");//Cargado de imagen de fondo
+	std::shared_ptr<Stage> fight = std::make_shared<Stage>(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT, sf::Sprite{ fondo4 });
 
 	
 	StateStack allStages;// StateStack
@@ -158,9 +165,13 @@ int main()
 		// Obtener el tiempo transcurrido desde el último frame
 		float deltaTime = clock.restart().asSeconds();
 		timeSinceLastUpdate += deltaTime;
+		if (My_current_stage == Current_stage::combat)
+		{
+			m_timeSinceLastUpdate += deltaTime;
+		}
 
 		// Movimiento del sprite basado en las teclas presionadas
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && My_current_stage != Current_stage::combat)
 		{
 
 			float x = float((-1.0) * (speed) * (deltaTime));
@@ -174,7 +185,7 @@ int main()
 			mirar_arriba = false;
 
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && My_current_stage != Current_stage::combat)
 		{
 
 			float x = float((1.0) * (speed) * (deltaTime));
@@ -187,7 +198,7 @@ int main()
 			mirar_der = true;
 			mirar_arriba = false;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && My_current_stage != Current_stage::combat)
 		{
 
 			float x = 0.0;
@@ -202,7 +213,7 @@ int main()
 
 
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && My_current_stage != Current_stage::combat)
 		{
 
 			float x = 0.0;
@@ -268,6 +279,36 @@ int main()
 			show_npc = true;
 		}
 
+		if (posY >= 190.f && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && mirar_abajo && My_current_stage == Current_stage::outside)
+		{
+			character.setPosition(198.f, 235.f);
+			character.setTexture(Settings::textures["Der2"]);
+			monster1.setPosition(489.f, 250.f);
+			monster1.setTexture(Settings::textures["Monster1_at1"]);
+
+			allStages.pushStage(fight);
+			My_current_stage = Current_stage::combat;
+
+			show_npc = false;
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && My_current_stage == Current_stage::combat)
+		{
+			character.setPosition(400.f, 190.f);
+			allStages.popStage();
+			My_current_stage = Current_stage::outside;
+			monster1.setPosition(400.f, 230.f);
+			monster1.setTexture(Settings::textures["Monster1_diying"]);
+
+			show_npc = false;
+
+		}
+
+		if (My_current_stage == Current_stage::combat && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		{
+			fun_animation(m_timeSinceLastUpdate, m_timeBetweenUpdates, animation_monster1.Animiation_Attack, m_currentFrame, monster1);
+		}
+
 
 		render_texture.clear(sf::Color::Black);//Fondo negro
 		render_texture.draw(allStages.getCurrentStage()->get_sprite());//Pintar fondo
@@ -279,7 +320,7 @@ int main()
 			npc2.render(render_texture);
 		}
 
-		if (My_current_stage == Current_stage::outside)
+		if (My_current_stage == Current_stage::outside || My_current_stage == Current_stage::combat)
 		{
 			monster1.render(render_texture);
 		}
@@ -313,6 +354,21 @@ int main()
 			press_e_action.loadFromFile("assets/textures/entrar.jpg");
 			
 			render_texture.draw(press_e);
+		}
+		else if (posY >= 190.f && mirar_abajo && My_current_stage == Current_stage::outside)
+		{
+			press_e.setPosition(185, 200);
+			press_e_action.loadFromFile("assets/textures/entrar.jpg");
+
+			render_texture.draw(press_e);
+		}
+		else if (My_current_stage == Current_stage::combat)
+		{
+			press_e.setPosition(115.f, 380.f);
+			press_e_action.loadFromFile("assets/textures/salir.jpg");
+
+			render_texture.draw(press_e);
+
 		}
 		
 		render_texture.display();
