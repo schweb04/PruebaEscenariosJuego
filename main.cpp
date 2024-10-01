@@ -59,6 +59,7 @@ int main()
 	bool mirar_iz = false;
 	bool mirar_abajo = false;
 	bool show_npc = true;
+	bool monster_is_alive = true;
 
 
 	sf::RenderWindow window{ sf::VideoMode{Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT} , "Demo", sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar };//Ventana
@@ -270,6 +271,11 @@ int main()
 			show_npc = false;
 		}
 
+		if (My_current_stage == Current_stage::outside && monster_is_alive)
+		{
+
+		}
+
 		if (posY <= 10.f && sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mirar_arriba && My_current_stage == Current_stage::outside)
 		{
 			character.setPosition(185.f, 300.f);
@@ -282,6 +288,8 @@ int main()
 
 		if (posY >= 190.f && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && mirar_abajo && My_current_stage == Current_stage::outside)
 		{
+			monster_is_alive = false;
+			
 			character.setPosition(198.f, 235.f);
 			character.setTexture(Settings::textures["Der2"]);
 			monster1.setPosition(489.f, 250.f);
@@ -305,7 +313,7 @@ int main()
 
 		}
 
-		if (My_current_stage == Current_stage::combat && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if (My_current_stage == Current_stage::combat)
 		{
 			fun_animation(m_timeSinceLastUpdate, m_timeBetweenUpdates, animation_monster1.Animation_Attack, m_currentFrame, monster1);
 		}
@@ -358,7 +366,7 @@ int main()
 		}
 		else if (posY >= 190.f && mirar_abajo && My_current_stage == Current_stage::outside)
 		{
-			press_e.setPosition(185, 200);
+			press_e.setPosition(175, 200);
 			press_e_action.loadFromFile("assets/textures/fight.png");
 
 			render_texture.draw(press_e);
