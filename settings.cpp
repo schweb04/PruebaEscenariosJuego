@@ -98,7 +98,7 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Back1"] = texture;
-	//Animation::AnimationBack.push_back(texture);
+
 
 	if (!texture.loadFromFile("assets/textures/back2.png"))
 	{
@@ -106,7 +106,7 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Back2"] = texture;
-	//Animation::AnimationBack.push_back(texture);
+
 
 	if (!texture.loadFromFile("assets/textures/back3.png"))
 	{
@@ -114,7 +114,49 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Back3"] = texture;
-	//Animation::AnimationBack.push_back(texture);
+
+	if (!texture.loadFromFile("assets/textures/enemigo_1/standing.png"))
+	{
+		std::cerr << "Error loading image" << std::endl;
+		return;
+	}
+	Settings::textures["Monster1_stand"] = texture;
+
+	if (!texture.loadFromFile("assets/textures/enemigo_1/at1.png"))
+	{
+		std::cerr << "Error loading image" << std::endl;
+		return;
+	}
+	Settings::textures["Monster1_at1"] = texture;
+
+	if (!texture.loadFromFile("assets/textures/enemigo_1/at2.png"))
+	{
+		std::cerr << "Error loading image" << std::endl;
+		return;
+	}
+	Settings::textures["Monster1_at2"] = texture;
+
+	if (!texture.loadFromFile("assets/textures/enemigo_1/at3.png"))
+	{
+		std::cerr << "Error loading image" << std::endl;
+		return;
+	}
+	Settings::textures["Monster1_at3"] = texture;
+
+	if (!texture.loadFromFile("assets/textures/enemigo_1/at4.png"))
+	{
+		std::cerr << "Error loading image" << std::endl;
+		return;
+	}
+	Settings::textures["Monster1_at4"] = texture;
+
+	if (!texture.loadFromFile("assets/textures/enemigo_1/diying.png"))
+	{
+		std::cerr << "Error loading image" << std::endl;
+		return;
+	}
+	Settings::textures["Monster1_diying"] = texture;
+
 }
 
 void Settings::load_frames(std::vector<sf::Texture>& _AnimationRight, std::vector<sf::Texture>& _AnimationLeft, std::vector<sf::Texture>& _AnimationFront, std::vector<sf::Texture>& _AnimationBack)

@@ -25,7 +25,15 @@ void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::v
 }
 //prueba
 
-
+void load_monster1(std::vector<sf::Texture> _A)
+{
+	_A.push_back(Settings::textures["Monster1_stand"]);
+	_A.push_back(Settings::textures["Monster1_at1"]);
+	_A.push_back(Settings::textures["Monster1_at2"]);
+	_A.push_back(Settings::textures["Monster1_at3"]);
+	_A.push_back(Settings::textures["Monster1_at4"]);
+	_A.push_back(Settings::textures["Monster1_diying"]);
+}
 
 
 
@@ -34,6 +42,7 @@ int main()
 	Settings::init();//Inicializacion de texturas
 	sf::Clock clock;//timer
 	Animation MyAnimation;//Structura que guarda los frames
+	Attack_animation animation_monster1;// estructura que guarda los frames del monstruo 1
 	Settings::load_frames(MyAnimation.AnimationRight, MyAnimation.AnimationLeft, MyAnimation.AnimationFront, MyAnimation.AnimationBack);//Cargado de frames
 
 	int currentFrame = 0;
@@ -85,9 +94,17 @@ int main()
 	sf::Texture tex2;
 	tex2.loadFromFile("assets/textures/iz3.png");
 	sf::Sprite ps2{tex2};
+
 	Character npc
 	{
 		580, 280, 30, 50, ps2
+	};
+
+
+	sf::Sprite monster1_spr{ Settings::textures["Monster1_stand"] };//Monster 1
+	Character monster1
+	{
+		400, 230, 53, 48, monster1_spr
 	};
 
 	sf::Texture tex3;
@@ -260,6 +277,11 @@ int main()
 		{
 			npc.render(render_texture);
 			npc2.render(render_texture);
+		}
+
+		if (My_current_stage == Current_stage::outside)
+		{
+			monster1.render(render_texture);
 		}
 
 		//Mostrar mensaje para cambiar de escenario

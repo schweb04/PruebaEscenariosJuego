@@ -10,3 +10,8 @@ struct Animation
 	 std::vector<sf::Texture> AnimationFront;
 	 std::vector<sf::Texture> AnimationBack;
 };
+
+struct Attack_animation
+{
+	std::vector<sf::Texture> Animiation_Attack;
+};
