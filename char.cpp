@@ -1,10 +1,12 @@
 #include <settings.hpp>
 #include <char.hpp>
 #include <animation.hpp>
+#include <string>
 
 Character::Character(float _x, float _y, float _w, float _h) noexcept
 	: x{ _x }, y{ _y }, width{ _w }, height{ _h }, sprite{ Settings::textures["Der1"] }
 {
+	name = ' ';
 	sprite.setPosition(x,y);
 }
 
@@ -41,5 +43,10 @@ void Character::move(float& mov_x,float& mov_y, Current_stage& _stage) noexcept
 void Character::setPosition(float _x, float _y) noexcept
 {
 	sprite.setPosition(_x, _y);
+}
+
+void Character::setName(std::string& _name) 
+{
+	name = _name;
 }
 

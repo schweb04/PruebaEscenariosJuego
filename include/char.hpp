@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+
 enum class Current_stage
 {
 	Principal_stage,
@@ -31,6 +32,8 @@ public:
 	void setTexture(sf::Texture& tex) noexcept;
 
 	void setPosition(float _x, float _y) noexcept;
+
+	void setName(std::string& _name);
 	
 private:
 
