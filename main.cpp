@@ -277,7 +277,7 @@ int main()
 			show_npc = true;
 		}
 
-		if (posY >= 190.f && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && mirar_abajo && My_current_stage == Current_stage::outside)
+		if (posY >= 190.f && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && mirar_abajo && My_current_stage == Current_stage::outside && monster_is_alive)
 		{
 			monster_is_alive = false;
 			
@@ -301,6 +301,7 @@ int main()
 			monster1.setTexture(Settings::textures["Monster1_diying"]);
 
 			show_npc = false;
+			monster_is_alive = false;
 
 		}
 
@@ -355,7 +356,7 @@ int main()
 			
 			render_texture.draw(press_e);
 		}
-		else if (posY >= 190.f && mirar_abajo && My_current_stage == Current_stage::outside)
+		else if (posY >= 190.f && mirar_abajo && My_current_stage == Current_stage::outside && monster_is_alive)
 		{
 			press_e.setPosition(175, 200);
 			press_e_action.loadFromFile("assets/textures/fight.png");
