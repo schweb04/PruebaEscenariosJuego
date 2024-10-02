@@ -39,4 +39,5 @@ private:
 	float width;
 	float height;
 	sf::Sprite sprite;
+	std::string name;
 };
