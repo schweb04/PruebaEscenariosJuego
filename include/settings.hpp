@@ -23,7 +23,9 @@ struct Settings
 
 	static std::unordered_map<std::string,sf::Texture> textures;
 
-	static void init();
+	static void init(std::vector<sf::Texture>& _M);
+
+	static void load_monster1(std::vector<sf::Texture>& _A);
 
 	static void load_textures();
 

@@ -25,25 +25,16 @@ void fun_animation(float& timeSinceLastUpdate, float& timeBetweenUpdates, std::v
 }
 //prueba
 
-void load_monster1(std::vector<sf::Texture>& _A)
-{
-	_A.push_back(Settings::textures["Monster1_at1"]);
-	_A.push_back(Settings::textures["Monster1_at2"]);
-	_A.push_back(Settings::textures["Monster1_at3"]);
-	_A.push_back(Settings::textures["Monster1_at4"]);
-}
-
-
 
 
 int main()
 {
-	Settings::init();//Inicializacion de texturas
 	sf::Clock clock;//timer
 	Animation MyAnimation;//Structura que guarda los frames
 	Attack_animation animation_monster1;// estructura que guarda los frames del monstruo 1
+
+	Settings::init(animation_monster1.Animation_Attack);//Inicializacion de texturas
 	Settings::load_frames(MyAnimation.AnimationRight, MyAnimation.AnimationLeft, MyAnimation.AnimationFront, MyAnimation.AnimationBack);//Cargado de frames
-	load_monster1(animation_monster1.Animation_Attack);
 
 	int currentFrame = 0;
 	float timeSinceLastUpdate = 0.0f;
@@ -121,7 +112,7 @@ int main()
 	sf::Sprite ps3{ tex3 };
 	Character npc2
 	{
-		185, 325, 30, 50, ps3
+		185, 325, 70, 65, ps3
 	};
 
 

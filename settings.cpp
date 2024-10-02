@@ -8,9 +8,18 @@ const std::string Settings::TEXTURES_PATH{"assets/textures"};
 
 std::unordered_map<std::string,sf::Texture> Settings::textures{};
 
-void Settings::init()
+void Settings::init(std::vector<sf::Texture>& _M)
 {
 	Settings::load_textures();
+	Settings::load_monster1(_M);
+}
+
+void Settings::load_monster1(std::vector<sf::Texture>& _A)
+{
+	_A.push_back(Settings::textures["Monster1_at1"]);
+	_A.push_back(Settings::textures["Monster1_at2"]);
+	_A.push_back(Settings::textures["Monster1_at3"]);
+	_A.push_back(Settings::textures["Monster1_at4"]);
 }
 
 void Settings::load_textures()
@@ -23,7 +32,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Der1"] = texture;
-	//Settings::AnimationRight.push_back(texture);
 
 	if (!texture.loadFromFile("assets/textures/der2.png"))
 	{
@@ -31,7 +39,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Der2"] = texture;
-	//Settings::AnimationRight.push_back(texture);
 
 	if (!texture.loadFromFile("assets/textures/der3.png"))
 	{
@@ -39,7 +46,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Der3"] = texture;
-	//Animation::AnimationRight.push_back(texture);
 
 	//frente
 	if (!texture.loadFromFile("assets/textures/fre1.png"))
@@ -48,7 +54,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Front1"] = texture;
-	//Animation::AnimationFront.push_back(texture);
 
 	if (!texture.loadFromFile("assets/textures/fre2.png"))
 	{
@@ -56,7 +61,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Front2"] = texture;
-	//Animation::AnimationFront.push_back(texture);
 
 	if (!texture.loadFromFile("assets/textures/fre3.png"))
 	{
@@ -64,7 +68,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Front3"] = texture;
-	//Animation::AnimationFront.push_back(texture);
 
 	//izquierda
 	if (!texture.loadFromFile("assets/textures/iz1.png"))
@@ -73,7 +76,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Iz1"] = texture;
-	//Animation::AnimationLeft.push_back(texture);
 
 	if (!texture.loadFromFile("assets/textures/iz2.png"))
 	{
@@ -81,7 +83,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Iz2"] = texture;
-	//Animation::AnimationLeft.push_back(texture);
 
 	if (!texture.loadFromFile("assets/textures/iz3.png"))
 	{
@@ -89,7 +90,6 @@ void Settings::load_textures()
 		return;
 	}
 	Settings::textures["Iz3"] = texture;
-	//Animation::AnimationLeft.push_back(texture);
 
 	//espalda
 	if (!texture.loadFromFile("assets/textures/back1.png"))
