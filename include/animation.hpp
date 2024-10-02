@@ -5,13 +5,13 @@
 
 struct Animation
 {
-	 std::vector<sf::Texture> AnimationRight;
-	 std::vector<sf::Texture> AnimationLeft;
-	 std::vector<sf::Texture> AnimationFront;
-	 std::vector<sf::Texture> AnimationBack;
+	 std::vector<sf::Texture> RightAnimation;
+	 std::vector<sf::Texture> LeftAnimation;
+	 std::vector<sf::Texture> FrontAnimation;
+	 std::vector<sf::Texture> BackAnimation;
 };
 
 struct Attack_animation
 {
-	std::vector<sf::Texture> Animation_Attack;
+	std::vector<sf::Texture> AttackAnimation;
 };

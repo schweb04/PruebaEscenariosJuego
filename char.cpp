@@ -4,7 +4,7 @@
 #include <string>
 
 Character::Character(float _x, float _y, float _w, float _h) noexcept
-	: x{ _x }, y{ _y }, width{ _w }, height{ _h }, sprite{ Settings::textures["Der1"] }
+	: x{ _x }, y{ _y }, width{ _w }, height{ _h }, sprite{ Settings::textures["Right1"] }
 {
 	name = ' ';
 	sprite.setPosition(x,y);
@@ -34,7 +34,7 @@ sf::Sprite Character::get_sprite() noexcept
 void Character::move(float& mov_x,float& mov_y, Current_stage& _stage) noexcept
 {
 	sprite.move(mov_x, mov_y);
-	if (_stage == Current_stage::Principal_stage)
+	if (_stage == Current_stage::MainStage)
 	{
 		Settings::limit_principal_map(sprite);
 	}

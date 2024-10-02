@@ -5,11 +5,10 @@
 
 enum class Current_stage
 {
-	Principal_stage,
-	casa_1,
-	casa_2,
-	outside,
-	combat
+	MainStage,
+	House,
+	Outside,
+	Combat
 };
 
 class Character
